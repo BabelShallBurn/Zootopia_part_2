@@ -15,7 +15,6 @@ def fetch_data(animal_name:str):
     try:
         res = requests.get(url=URL, params={'name': animal_name}, headers={'X-API-Key': API_KEY})
         data = res.json()
-        print(res.status_code)
         return data
     except Exception as e:
         print("Error: ", e)
