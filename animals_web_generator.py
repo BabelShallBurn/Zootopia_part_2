@@ -1,13 +1,13 @@
 import data_fetcher
 
-def load_html(file_path):
+def load_html(file_path:str):
     """ Loads a HTML file """
     with open(file_path, "r", encoding="utf-8") as fileobj:
         html_content = fileobj.read()
         return html_content
 
 
-def serialize_animal(animal):
+def serialize_animal(animal:dict):
     """serializes animal and returns neccessary data in list form
 
     Args:
@@ -31,7 +31,7 @@ def serialize_animal(animal):
     return animal_obj
 
 
-def create_html(serialized_animal):
+def create_html(serialized_animal:list):
     """creates html string from serialized animal
 
     Args:
@@ -59,9 +59,12 @@ def create_html(serialized_animal):
 
 def main():
     animal_name = input("Please enter an animal: ")
+    html_data = load_html('animals_template.html')
     animals_data = data_fetcher.fetch_data(animal_name)
 
-    html_data = load_html('animals_template.html')
+    if animals_data == [] or not isinstance(animals_data, list):
+        print("Animals data is not available.")
+        return
 
     animals_data_string = ""
 

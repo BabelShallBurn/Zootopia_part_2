@@ -1,5 +1,4 @@
 import os
-import json
 import requests
 from dotenv import load_dotenv
 
@@ -8,11 +7,15 @@ API_KEY = os.getenv("API_KEY")
 URL = 'https://api.api-ninjas.com/v1/animals'
 
 
-def fetch_data(animal_name):
+def fetch_data(animal_name:str):
     """
     Fetches the animals data for the animal 'animal_name'.
     Returns: a list of animals, each animal is a dictionary.
     """
-    res = requests.get(url=URL, params={'name': animal_name}, headers={'X-API-Key': API_KEY})
-    data = res.json()
-    return data
+    try:
+        res = requests.get(url=URL, params={'name': animal_name}, headers={'X-API-Key': API_KEY})
+        data = res.json()
+        print(res.status_code)
+        return data
+    except Exception as e:
+        print("Error: ", e)
