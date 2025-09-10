@@ -1,1 +1,5 @@
 .env
+.idea/
+.venv/
+__pycache__/
+__pycache__/data_fetcher.cpython-313.pyc

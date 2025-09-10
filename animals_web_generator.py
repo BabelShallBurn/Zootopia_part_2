@@ -8,7 +8,7 @@ def load_html(file_path:str):
 
 
 def serialize_animal(animal:dict):
-    """serializes animal and returns neccessary data in list form
+    """serializes animal and returns necessary data in list form
 
     Args:
         animal (dict): holds information of one animal
@@ -61,18 +61,19 @@ def main():
     animal_name = input("Please enter an animal: ")
     html_data = load_html('animals_template.html')
     animals_data = data_fetcher.fetch_data(animal_name)
+    print(animals_data)
 
-    if animals_data == [] or not isinstance(animals_data, list):
-        print("Animals data is not available.")
-        return
+    if not animals_data:
+        html_data = html_data.replace("My Animal Repository", f"{animal_name} doesn't exist.")
+        html_data = html_data.replace('''<ul class="cards">\n            __REPLACE_ANIMALS_INFO__\n        </ul>''', "Here would be your animal's info.")
+        print(html_data)
 
     animals_data_string = ""
-
-    for animal in animals_data:
-        serialized_animal = serialize_animal(animal)
-        animals_data_string += create_html(serialized_animal)
-
-    html_data = html_data.replace("__REPLACE_ANIMALS_INFO__", animals_data_string)
+    if animals_data != []:
+        for animal in animals_data:
+            serialized_animal = serialize_animal(animal)
+            animals_data_string += create_html(serialized_animal)
+        html_data = html_data.replace("__REPLACE_ANIMALS_INFO__", animals_data_string)
 
     with open("animals_data.html", "w", encoding="utf-8") as handle:
         handle.write(html_data)
