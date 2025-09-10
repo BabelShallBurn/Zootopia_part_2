@@ -76,5 +76,7 @@ def main():
     with open("animals_data.html", "w", encoding="utf-8") as handle:
         handle.write(html_data)
 
+    print("Website sucessfully generated to the file animals_data.html")
+
 if __name__ == "__main__":
     main()
