@@ -61,7 +61,6 @@ def main():
     animal_name = input("Please enter an animal: ")
     html_data = load_html('animals_template.html')
     animals_data = data_fetcher.fetch_data(animal_name)
-    print(animals_data)
 
     if not animals_data:
         html_data = html_data.replace("My Animal Repository", f"{animal_name} doesn't exist.")
