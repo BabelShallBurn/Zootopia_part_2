@@ -66,7 +66,6 @@ def main():
     if not animals_data:
         html_data = html_data.replace("My Animal Repository", f"{animal_name} doesn't exist.")
         html_data = html_data.replace('''<ul class="cards">\n            __REPLACE_ANIMALS_INFO__\n        </ul>''', "Here would be your animal's info.")
-        print(html_data)
 
     animals_data_string = ""
     if animals_data != []:
